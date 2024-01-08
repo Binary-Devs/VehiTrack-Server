@@ -276,16 +276,13 @@ const vehicleSummaryReport = async (
 };
 
 const getTripSummary = async (): Promise<ITotalTripSummary> => {
-  const trips = await prisma.trip.groupBy({
-    by: ['status'],
-    where: {
-      status: 'Completed',
-    },
+  const trips = await prisma.trip.aggregate({
     _sum: {
       amount: true,
     },
     _count: true,
   });
+
   const expenses = await prisma.expense.groupBy({
     by: ['isMisc'],
     where: {
@@ -298,9 +295,9 @@ const getTripSummary = async (): Promise<ITotalTripSummary> => {
 
   const result: ITotalTripSummary = {};
 
-  if (trips.length) {
-    result.count = trips[0]._count || 0;
-    result.amount = trips[0]._sum.amount || 0;
+  if (trips) {
+    result.count = trips._count || 0;
+    result.amount = trips._sum.amount || 0;
   }
 
   if (expenses.length) {
@@ -312,11 +309,12 @@ const getTripSummary = async (): Promise<ITotalTripSummary> => {
 
 const tripSummaryGroupByMonthYear = async (): Promise<IYearMonthSummary[]> => {
   const result: IYearMonthSummary[] =
-    await prisma.$queryRaw`SELECT EXTRACT(YEAR FROM "startDate") AS year, EXTRACT(MONTH FROM "startDate") AS month,  SUM(amount) AS total_amount FROM trips GROUP BY year, month ORDER BY year, month`;
+    await prisma.$queryRaw`SELECT EXTRACT(YEAR FROM "startDate") AS year, EXTRACT(MONTH FROM "startDate") AS month, COUNT(*) AS total_quantity,  SUM(amount) AS total_amount FROM trips GROUP BY year, month ORDER BY year, month`;
 
   const formattedResult = result.map(row => ({
     year: row.year,
     month: row.month,
+    total_quantity: Number(row.total_quantity),
     total_amount: Number(row.total_amount),
   }));
   return formattedResult;
