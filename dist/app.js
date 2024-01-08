@@ -1,28 +1,22 @@
-'use strict';
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
-Object.defineProperty(exports, '__esModule', { value: true });
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const express_1 = __importDefault(require('express'));
-const cors_1 = __importDefault(require('cors'));
-const logger_1 = require('./shared/logger');
-const globalErrorHandler_1 = __importDefault(
-  require('./app/middlewares/globalErrorHandler')
-);
-const notFoundHandler_1 = __importDefault(
-  require('./app/middlewares/notFoundHandler')
-);
-const path_1 = __importDefault(require('path'));
-const cookie_parser_1 = __importDefault(require('cookie-parser'));
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const logger_1 = require("./shared/logger");
+const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
+const notFoundHandler_1 = __importDefault(require("./app/middlewares/notFoundHandler"));
+const path_1 = __importDefault(require("path"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 // sock.io
-const http_1 = require('http');
-const socket_io_1 = require('socket.io');
+const http_1 = require("http");
+const socket_io_1 = require("socket.io");
 // import router
-const routes_1 = __importDefault(require('./app/routes'));
-const corsOptions_1 = __importDefault(require('./config/corsOptions'));
+const routes_1 = __importDefault(require("./app/routes"));
+const corsOptions_1 = __importDefault(require("./config/corsOptions"));
 const app = (0, express_1.default)();
 // socket.io
 const server = (0, http_1.createServer)(app);
