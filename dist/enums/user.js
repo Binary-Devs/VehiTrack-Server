@@ -8,4 +8,5 @@ var ENUM_USER_ROLE;
     ENUM_USER_ROLE["ADMIN"] = "admin";
     ENUM_USER_ROLE["DRIVER"] = "driver";
     ENUM_USER_ROLE["HELPER"] = "helper";
+    //
 })(ENUM_USER_ROLE || (exports.ENUM_USER_ROLE = ENUM_USER_ROLE = {}));
