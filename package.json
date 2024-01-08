@@ -1,7 +1,7 @@
 {
   "name": "server1",
   "version": "1.0.0",
-  "type": "module",
+
   "main": "src/server.ts",
   "engines": {
     "node": ">=16"
