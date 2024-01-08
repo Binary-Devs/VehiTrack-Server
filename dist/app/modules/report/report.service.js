@@ -239,11 +239,7 @@ const vehicleSummaryReport = (filters, paginationOptions) => __awaiter(void 0, v
     };
 });
 const getTripSummary = () => __awaiter(void 0, void 0, void 0, function* () {
-    const trips = yield prisma_1.default.trip.groupBy({
-        by: ['status'],
-        where: {
-            status: 'Completed',
-        },
+    const trips = yield prisma_1.default.trip.aggregate({
         _sum: {
             amount: true,
         },
@@ -259,9 +255,9 @@ const getTripSummary = () => __awaiter(void 0, void 0, void 0, function* () {
         },
     });
     const result = {};
-    if (trips.length) {
-        result.count = trips[0]._count || 0;
-        result.amount = trips[0]._sum.amount || 0;
+    if (trips) {
+        result.count = trips._count || 0;
+        result.amount = trips._sum.amount || 0;
     }
     if (expenses.length) {
         result.expense = expenses[0]._sum.amount || 0;
@@ -269,10 +265,11 @@ const getTripSummary = () => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const tripSummaryGroupByMonthYear = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.$queryRaw `SELECT EXTRACT(YEAR FROM "startDate") AS year, EXTRACT(MONTH FROM "startDate") AS month,  SUM(amount) AS total_amount FROM trips GROUP BY year, month ORDER BY year, month`;
+    const result = yield prisma_1.default.$queryRaw `SELECT EXTRACT(YEAR FROM "startDate") AS year, EXTRACT(MONTH FROM "startDate") AS month, COUNT(*) AS total_quantity,  SUM(amount) AS total_amount FROM trips GROUP BY year, month ORDER BY year, month`;
     const formattedResult = result.map(row => ({
         year: row.year,
         month: row.month,
+        total_quantity: Number(row.total_quantity),
         total_amount: Number(row.total_amount),
     }));
     return formattedResult;

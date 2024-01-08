@@ -16,6 +16,7 @@ const http_1 = require("http");
 const socket_io_1 = require("socket.io");
 // import router
 const routes_1 = __importDefault(require("./app/routes"));
+const corsOptions_1 = __importDefault(require("./config/corsOptions"));
 const app = (0, express_1.default)();
 // socket.io
 const server = (0, http_1.createServer)(app);
@@ -29,12 +30,14 @@ app.use(logger_1.requestLog);
 // static public folder
 app.use(express_1.default.static(path_1.default.join(process.cwd(), 'public')));
 // using cors
-// app.use(cors(corsOptions));
-app.use((0, cors_1.default)({
-    origin: true,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-}));
+app.use((0, cors_1.default)(corsOptions_1.default));
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+//   })
+// );
 app.use((0, cookie_parser_1.default)());
 // using parser
 app.use(express_1.default.json());

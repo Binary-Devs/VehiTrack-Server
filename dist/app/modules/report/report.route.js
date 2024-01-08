@@ -18,14 +18,7 @@ router.get('/stock-status', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMI
 // summary report
 router.get('/summary-report', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.DRIVER, user_1.ENUM_USER_ROLE.HELPER), report_controller_1.ReportController.vehicleSummaryReport);
 // trip summary
-router.get('/trip-summary', 
-// auth(
-//   ENUM_USER_ROLE.SUPER_ADMIN,
-//   ENUM_USER_ROLE.ADMIN,
-//   ENUM_USER_ROLE.DRIVER,
-//   ENUM_USER_ROLE.HELPER
-// ),
-report_controller_1.ReportController.getTripSummary);
+router.get('/trip-summary', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.DRIVER, user_1.ENUM_USER_ROLE.HELPER), report_controller_1.ReportController.getTripSummary);
 // get trip summary by grouping year, month
 router.get('/trip-summary-year-month', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.DRIVER, user_1.ENUM_USER_ROLE.HELPER), report_controller_1.ReportController.tripSummaryGroupByMonthYear);
 // get fuel summary by grouping year, month
