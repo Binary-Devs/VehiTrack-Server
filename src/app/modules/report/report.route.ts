@@ -56,12 +56,12 @@ router.get(
 // trip summary
 router.get(
   '/trip-summary',
-  // auth(
-  //   ENUM_USER_ROLE.SUPER_ADMIN,
-  //   ENUM_USER_ROLE.ADMIN,
-  //   ENUM_USER_ROLE.DRIVER,
-  //   ENUM_USER_ROLE.HELPER
-  // ),
+  auth(
+    ENUM_USER_ROLE.SUPER_ADMIN,
+    ENUM_USER_ROLE.ADMIN,
+    ENUM_USER_ROLE.DRIVER,
+    ENUM_USER_ROLE.HELPER
+  ),
   ReportController.getTripSummary
 );
 
