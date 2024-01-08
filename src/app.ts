@@ -24,16 +24,17 @@ app.set('io', io);
 app.use(requestLog);
 // static public folder
 app.use(express.static(path.join(process.cwd(), 'public')));
-// using cors
-// app.use(cors(corsOptions));
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  })
-);
+// using cors
+app.use(cors(corsOptions));
+
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+//   })
+// );
 
 app.use(cookieParser());
 // using parser
