@@ -25,7 +25,7 @@ const findLastId = () => __awaiter(void 0, void 0, void 0, function* () {
             helperId: true,
         },
     });
-    const splitCurrent = ((_a = currentId === null || currentId === void 0 ? void 0 : currentId.helperId) === null || _a === void 0 ? void 0 : _a.split('F-')) || ['', '0'];
+    const splitCurrent = ((_a = currentId === null || currentId === void 0 ? void 0 : currentId.helperId) === null || _a === void 0 ? void 0 : _a.split('H-')) || ['', '0'];
     return splitCurrent[1];
 });
 // generate helper ID

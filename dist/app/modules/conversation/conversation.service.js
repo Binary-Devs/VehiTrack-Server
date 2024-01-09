@@ -34,9 +34,18 @@ const createConversationToDB = (user, conversationData) => __awaiter(void 0, voi
     const newResult = yield prisma_1.default.$transaction((transactionClient) => __awaiter(void 0, void 0, void 0, function* () {
         const isExist = yield transactionClient.conversation.findFirst({
             where: {
-                participants: {
-                    contains: receiverId,
-                },
+                AND: [
+                    {
+                        participants: {
+                            contains: senderId,
+                        },
+                    },
+                    {
+                        participants: {
+                            contains: receiverId,
+                        },
+                    },
+                ],
             },
         });
         if (isExist) {
