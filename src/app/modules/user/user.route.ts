@@ -61,12 +61,12 @@ router.post(
 // create helper
 router.post(
   '/create-helper',
-  // auth(
-  //   ENUM_USER_ROLE.SUPER_ADMIN,
-  //   ENUM_USER_ROLE.ADMIN,
-  //   ENUM_USER_ROLE.DRIVER,
-  //   ENUM_USER_ROLE.HELPER
-  // ),
+  auth(
+    ENUM_USER_ROLE.SUPER_ADMIN,
+    ENUM_USER_ROLE.ADMIN,
+    ENUM_USER_ROLE.DRIVER,
+    ENUM_USER_ROLE.HELPER
+  ),
   validateRequest(UserValidation.createHelper),
   UserController.createHelper
 );
