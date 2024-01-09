@@ -20,9 +20,18 @@ export const createConversationToDB = async (
   const newResult = await prisma.$transaction(async transactionClient => {
     const isExist = await transactionClient.conversation.findFirst({
       where: {
-        participants: {
-          contains: receiverId,
-        },
+        AND: [
+          {
+            participants: {
+              contains: senderId,
+            },
+          },
+          {
+            participants: {
+              contains: receiverId,
+            },
+          },
+        ],
       },
     });
 
