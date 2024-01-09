@@ -11,7 +11,7 @@ const findLastId = async (): Promise<string> => {
     },
   });
 
-  const splitCurrent = currentId?.helperId?.split('F-') || ['', '0'];
+  const splitCurrent = currentId?.helperId?.split('H-') || ['', '0'];
 
   return splitCurrent[1];
 };
